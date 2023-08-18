@@ -100,6 +100,20 @@
         71. CountLeafNodes();
         72. CountParentNodes(); 
 
+        Functions on Stack :
+
+        73. Push();
+        74. Pop();
+        75. Display();
+        76. Count();
+
+        Functions on Queue :
+
+        77. Enqueue();
+        78. Dequeue();
+        79. Display();
+        80. Count();
+
 */
 
 #include <iostream>
@@ -331,6 +345,39 @@ class BST
         int CountLeafNodes();
         int CountParentNodes();
 };
+
+template <class T>
+class Stack
+{
+    public:
+        NodeS<T> *head;
+        int iCount;
+
+        Stack();
+
+        void Push(T No);
+        void Pop();
+
+        void Display();
+        int Count();       
+};
+
+template <class T>
+class Queue
+{
+    public:
+        NodeS<T> *head;
+        int iCount;
+
+        Queue();
+
+        void Enqueue(T No);
+        void Dequeue();
+
+        void Display();
+        int Count();       
+};
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -2214,6 +2261,143 @@ template <class T>
 int BST<T>::CountParentNodes()
 {
     int iCount = CountLeafNodesF(head);
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//   STACK FUNCTIONS  
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+Stack<T>::Stack()
+{
+    head = NULL;
+    iCount = 0;
+}
+
+template <class T>
+void Stack<T>::Push(T No)
+{
+    NodeS<T> *newn = new NodeS(No);
+    NodeS<T> *temp = head;
+
+    if(head == NULL)
+    {
+        head = newn;
+    }
+    else
+    {
+
+        for(int i = 1; i < iCount; i++)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newn;
+    }
+    iCount++;    
+}
+
+template <class T>
+void Stack<T>::Pop()
+{
+    NodeS<T> *temp = head;
+
+    for(int i = 1; i < iCount - 1; i++)
+    {
+        temp = temp -> next;
+    }
+    
+    delete temp -> next;
+
+    temp -> next = NULL;
+
+    iCount--;    
+}
+
+template <class T>
+void Stack<T>::Display()
+{
+    NodeS<T> *temp = head;
+
+    for(int i = 1; i <= iCount; i++)
+    {
+        cout<<" | "<<temp -> data<<" | -> ";
+        temp = temp -> next;
+    }
+    cout<<"\n";
+}
+
+template <class T>
+int Stack<T>::Count()
+{
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//   QUEUE FUNCTIONS  
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+Queue<T>::Queue()
+{
+    head = NULL;
+    iCount = 0;
+}
+
+template <class T>
+void Queue<T>::Enqueue(T No)
+{
+    NodeS<T> *newn = new NodeS(No);
+    NodeS<T> *temp = head;
+
+    if(head == NULL)
+    {
+        head = newn;
+    }
+    else
+    {
+
+        for(int i = 1; i < iCount; i++)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newn;
+    }
+    iCount++;    
+}
+
+template <class T>
+void Queue<T>::Dequeue()
+{
+    NodeS<T> *temp = head;
+
+    head = head -> next;
+
+    delete temp;
+
+    iCount--;    
+}
+
+template <class T>
+void Queue<T>::Display()
+{
+    NodeS<T> *temp = head;
+
+    for(int i = 1; i <= iCount; i++)
+    {
+        cout<<" | "<<temp -> data<<" | -> ";
+        temp = temp -> next;
+    }
+    cout<<"\n";
+}
+
+template <class T>
+int Queue<T>::Count()
+{
     return iCount;
 }
 
